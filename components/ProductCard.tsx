@@ -1,11 +1,14 @@
 import Image from "next/image";
-import type { ShopifyProduct } from "@/lib/shopify";
+import { getCheckoutUrl, type ShopifyProduct } from "@/lib/shopify";
 
 export default function ProductCard({ product }: { product: ShopifyProduct }) {
   const price = new Intl.NumberFormat("en-GB", {
     style: "currency",
     currency: product.priceRange.minVariantPrice.currencyCode,
   }).format(Number(product.priceRange.minVariantPrice.amount));
+
+  const variant = product.variants.nodes[0];
+  const checkoutUrl = variant ? getCheckoutUrl(variant.id) : null;
 
   return (
     <div className="group border border-border bg-surface">
@@ -27,6 +30,19 @@ export default function ProductCard({ product }: { product: ShopifyProduct }) {
         <p className="mt-1 font-tag text-xs uppercase tracking-tag text-muted">
           {price}
         </p>
+
+        {variant?.availableForSale && checkoutUrl ? (
+          <a
+            href={checkoutUrl}
+            className="mt-4 block border border-thread px-4 py-2 text-center font-tag text-xs uppercase tracking-tag text-thread hover:bg-thread hover:text-ground"
+          >
+            Buy now
+          </a>
+        ) : (
+          <p className="mt-4 font-tag text-xs uppercase tracking-tag text-muted">
+            Sold out
+          </p>
+        )}
       </div>
     </div>
   );

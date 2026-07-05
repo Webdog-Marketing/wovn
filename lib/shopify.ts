@@ -39,6 +39,9 @@ export type ShopifyProduct = {
   priceRange: {
     minVariantPrice: { amount: string; currencyCode: string };
   };
+  variants: {
+    nodes: { id: string; availableForSale: boolean }[];
+  };
 };
 
 export type ShopifyCollection = {
@@ -68,6 +71,12 @@ const COLLECTION_QUERY = `
               currencyCode
             }
           }
+          variants(first: 1) {
+            nodes {
+              id
+              availableForSale
+            }
+          }
         }
       }
     }
@@ -79,4 +88,19 @@ export async function getCollectionByHandle(handle: string) {
     handle,
   });
   return data.collection;
+}
+
+// The Storefront API returns variant IDs as global IDs, e.g. "gid://shopify/ProductVariant/1234567890".
+// The cart permalink format Shopify checkout understands just needs the numeric part.
+function numericVariantId(gid: string): string {
+  return gid.split("/").pop() ?? gid;
+}
+
+// Builds a direct link straight to Shopify checkout for a single variant, quantity 1.
+// checkoutDomain should be the Shopify-connected domain that still serves checkout,
+// e.g. "shop.wovn.club" — set via NEXT_PUBLIC_SHOPIFY_CHECKOUT_DOMAIN.
+export function getCheckoutUrl(variantId: string, quantity = 1): string {
+  const checkoutDomain =
+    process.env.NEXT_PUBLIC_SHOPIFY_CHECKOUT_DOMAIN || domain;
+  return `https://${checkoutDomain}/cart/${numericVariantId(variantId)}:${quantity}`;
 }
