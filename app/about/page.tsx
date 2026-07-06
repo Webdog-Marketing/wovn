@@ -1,16 +1,16 @@
 import StitchDivider from "@/components/StitchDivider";
 
-export const metadata = { title: "About — WVN" };
+export const metadata = { title: "About — WOVN" };
 
 export default function AboutPage() {
   return (
     <>
       <section className="mx-auto max-w-3xl px-6 pt-16 pb-10">
         <h1 className="font-display text-4xl uppercase tracking-wide text-ink">
-          About WVN
+          About WOVN
         </h1>
         <p className="mt-6 text-lg leading-relaxed text-muted">
-          The company behind WVN is{" "}
+          The company behind WOVN is{" "}
           <a
             href="https://www.webdogsports.marketing"
             className="text-thread thread-underline"
@@ -33,7 +33,7 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-3xl px-6 py-14">
         <p className="text-xl leading-relaxed text-ink">
-          Every kit tells a story. WVN builds bespoke sportswear for
+          Every kit tells a story. WOVN builds bespoke sportswear for
           organisations who refuse to be defined by their size: federations,
           clubs, and teams who want to punch above their weight and look like
           it.

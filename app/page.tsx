@@ -24,7 +24,7 @@ export default async function HomePage() {
           Woven for those who play bigger than they are
         </h1>
         <p className="mt-6 max-w-xl text-lg text-muted">
-          WVN builds bespoke sportswear for federations, clubs and teams who
+          WOVN builds bespoke sportswear for federations, clubs and teams who
           refuse to be defined by their size. No off-the-shelf templates. No
           compromise on craft.
         </p>

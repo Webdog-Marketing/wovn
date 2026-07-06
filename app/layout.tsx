@@ -23,9 +23,9 @@ const tag = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WVN — Woven",
+  title: "WOVN — Woven",
   description:
-    "WVN builds bespoke sportswear for organisations who refuse to be defined by their size.",
+    "WOVN builds bespoke sportswear for organisations who refuse to be defined by their size.",
 };
 
 export default function RootLayout({

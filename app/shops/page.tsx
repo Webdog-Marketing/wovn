@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getAllClients } from "@/lib/airtable";
 
-export const metadata = { title: "Club shops — WVN" };
+export const metadata = { title: "Club shops — WOVN" };
 
 export default async function ShopsIndexPage() {
   const clients = await getAllClients();

@@ -8,7 +8,7 @@ export default function Nav() {
           href="/"
           className="font-display text-2xl uppercase tracking-wide text-ink"
         >
-          WVN
+          WOVN
         </Link>
         <nav className="flex items-center gap-8 font-tag text-xs uppercase tracking-tag text-muted">
           <Link href="/shops" className="thread-underline hover:text-ink">
