@@ -104,3 +104,13 @@ export function getCheckoutUrl(variantId: string, quantity = 1): string {
     process.env.NEXT_PUBLIC_SHOPIFY_CHECKOUT_DOMAIN || domain;
   return `https://${checkoutDomain}/cart/${numericVariantId(variantId)}:${quantity}`;
 }
+
+// Builds a link to the full Shopify product page — lets the customer pick a size,
+// see all photos/variants, and browse the rest of the collection before buying.
+// Uses the same Shopify-connected domain as checkout, since that's what actually
+// serves Shopify's storefront theme.
+export function getProductUrl(handle: string): string {
+  const storefrontDomain =
+    process.env.NEXT_PUBLIC_SHOPIFY_CHECKOUT_DOMAIN || domain;
+  return `https://${storefrontDomain}/products/${handle}`;
+}
