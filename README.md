@@ -1,6 +1,6 @@
-# WVN website
+# WOVN website
 
-Next.js (App Router) site for WVN. Shopify is the source of truth for
+Next.js (App Router) site for WOVN. Shopify is the source of truth for
 products and collections. Airtable holds the marketing copy for each
 club shop and stores enquiry form submissions.
 
@@ -49,6 +49,19 @@ Get your base ID from the Airtable API documentation page for your
 base, and generate a personal access token with `data.records:read`
 and `data.records:write` scopes for this base only.
 
+## Enquiry notification emails
+
+Set `RESEND_API_KEY` and `ENQUIRY_NOTIFICATION_EMAIL` to get an email
+each time someone submits the enquiry form. Sign up at resend.com
+using the address you want notifications sent to — without any domain
+verification, Resend lets you send test emails straight to that same
+address, which is all this needs to start with. If you'd rather send
+from a branded address like `enquiries@wovn.club`, verify your domain
+in Resend's dashboard and update the `from` address in `lib/email.ts`.
+
+If these env vars aren't set, the form still works and still saves to
+Airtable — it just skips sending an email, rather than failing.
+
 ## Shopify setup
 
 In Shopify admin: Settings → Apps and sales channels → Develop apps →
@@ -64,6 +77,16 @@ Install the app and copy the Storefront API access token into
 Tag products per client and add them to a collection whose **handle**
 matches the "Shopify collection handle" field in Airtable for that
 client.
+
+### Checkout
+
+Each product card links to its full Shopify product page (not straight
+to checkout) — customers pick their size, see all photos, and browse
+the rest of the collection there, then check out normally through
+Shopify's own theme. Set `NEXT_PUBLIC_SHOPIFY_CHECKOUT_DOMAIN` to
+whichever domain still serves the Shopify storefront and checkout for
+you (e.g. `shop.wovn.club`, if your main domain now points to Vercel).
+If unset, it falls back to `NEXT_PUBLIC_SHOPIFY_DOMAIN`.
 
 ## Deploying
 
