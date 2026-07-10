@@ -32,6 +32,7 @@ export default function EnquirePage() {
       organisationType: form.get("organisationType"),
       contactName: form.get("contactName"),
       email: form.get("email"),
+      phone: form.get("phone"),
       country: form.get("country"),
       garmentTypes: selectedGarments,
       hasLogo: form.get("hasLogo"),
@@ -91,6 +92,7 @@ export default function EnquirePage() {
           />
           <Field label="Contact name" name="contactName" required />
           <Field label="Email" name="email" type="email" required />
+          <Field label="Phone" name="phone" type="tel" />
           <Field label="Country" name="country" />
         </fieldset>
 
@@ -109,7 +111,7 @@ export default function EnquirePage() {
                   onClick={() => toggleGarment(type)}
                   className={`border px-3 py-1.5 text-sm ${
                     selectedGarments.includes(type)
-                      ? "border-thread bg-thread text-ground"
+                      ? "border-thread bg-thread text-ink"
                       : "border-border text-muted hover:text-ink"
                   }`}
                 >
@@ -154,7 +156,7 @@ export default function EnquirePage() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="border border-thread px-6 py-3 font-tag text-xs uppercase tracking-tag text-thread hover:bg-thread hover:text-ground"
+          className="border border-thread px-6 py-3 font-tag text-xs uppercase tracking-tag text-thread hover:bg-thread hover:text-ink"
         >
           {status === "submitting" ? "Sending…" : "Send enquiry"}
         </button>

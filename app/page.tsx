@@ -18,7 +18,7 @@ export default async function HomePage() {
     <>
       <section className="mx-auto max-w-6xl px-6 pt-20 pb-16">
         <p className="font-tag text-xs uppercase tracking-tag text-thread">
-          Webdog Sports Marketing
+          Bespoke sportswear
         </p>
         <h1 className="mt-4 max-w-3xl font-display text-5xl uppercase leading-[1.05] tracking-wide text-ink sm:text-6xl">
           Woven for those who play bigger than they are
@@ -31,7 +31,7 @@ export default async function HomePage() {
         <div className="mt-8 flex gap-4">
           <Link
             href="/shops"
-            className="border border-thread px-6 py-3 font-tag text-xs uppercase tracking-tag text-thread hover:bg-thread hover:text-ground"
+            className="border border-thread px-6 py-3 font-tag text-xs uppercase tracking-tag text-thread hover:bg-thread hover:text-ink"
           >
             Browse club shops
           </Link>

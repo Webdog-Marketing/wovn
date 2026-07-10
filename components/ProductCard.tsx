@@ -39,7 +39,7 @@ export default function ProductCard({ product }: { product: ShopifyProduct }) {
           )}
         </div>
 
-        
+        <a
           href={productUrl}
           className="mt-4 block border border-thread px-4 py-2 text-center font-tag text-xs uppercase tracking-tag text-thread hover:bg-thread hover:text-ink"
         >

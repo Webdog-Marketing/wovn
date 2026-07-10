@@ -19,7 +19,7 @@ export default function Nav() {
           </Link>
           <Link
             href="/enquire"
-            className="rounded-sm border border-thread px-4 py-2 text-thread hover:bg-thread hover:text-ground"
+            className="rounded-sm border border-thread px-4 py-2 text-thread hover:bg-thread hover:text-ink"
           >
             Start a project
           </Link>
