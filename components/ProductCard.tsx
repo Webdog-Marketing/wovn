@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getCheckoutUrl, type ShopifyProduct } from "@/lib/shopify";
+import { getProductUrl, type ShopifyProduct } from "@/lib/shopify";
 
 export default function ProductCard({ product }: { product: ShopifyProduct }) {
   const price = new Intl.NumberFormat("en-GB", {
@@ -8,7 +8,8 @@ export default function ProductCard({ product }: { product: ShopifyProduct }) {
   }).format(Number(product.priceRange.minVariantPrice.amount));
 
   const variant = product.variants.nodes[0];
-  const checkoutUrl = variant ? getCheckoutUrl(variant.id) : null;
+  const inStock = variant?.availableForSale ?? false;
+  const productUrl = getProductUrl(product.handle);
 
   return (
     <div className="group border border-border bg-surface">
@@ -27,22 +28,23 @@ export default function ProductCard({ product }: { product: ShopifyProduct }) {
         <h3 className="font-display text-lg uppercase tracking-wide text-ink">
           {product.title}
         </h3>
-        <p className="mt-1 font-tag text-xs uppercase tracking-tag text-muted">
-          {price}
-        </p>
-
-        {variant?.availableForSale && checkoutUrl ? (
-          <a
-            href={checkoutUrl}
-            className="mt-4 block border border-thread px-4 py-2 text-center font-tag text-xs uppercase tracking-tag text-thread hover:bg-thread hover:text-ground"
-          >
-            Buy now
-          </a>
-        ) : (
-          <p className="mt-4 font-tag text-xs uppercase tracking-tag text-muted">
-            Sold out
+        <div className="mt-1 flex items-center gap-2">
+          <p className="font-tag text-xs uppercase tracking-tag text-muted">
+            {price}
           </p>
-        )}
+          {!inStock && (
+            <span className="font-tag text-xs uppercase tracking-tag text-muted">
+              · Sold out
+            </span>
+          )}
+        </div>
+
+        
+          href={productUrl}
+          className="mt-4 block border border-thread px-4 py-2 text-center font-tag text-xs uppercase tracking-tag text-thread hover:bg-thread hover:text-ink"
+        >
+          View product
+        </a>
       </div>
     </div>
   );
