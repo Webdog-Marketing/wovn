@@ -56,6 +56,7 @@ export type EnquiryPayload = {
   organisationType: string;
   contactName: string;
   email: string;
+  phone: string;
   country: string;
   garmentTypes: string[];
   hasLogo: string;
@@ -80,6 +81,7 @@ export async function createEnquiry(payload: EnquiryPayload) {
         "Organisation type": payload.organisationType,
         "Contact name": payload.contactName,
         Email: payload.email,
+        Phone: payload.phone,
         Country: payload.country,
         "Garment types": payload.garmentTypes,
         "Has logo": payload.hasLogo,
