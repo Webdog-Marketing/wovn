@@ -5,13 +5,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ground: "#14171A",
-        surface: "#1C2024",
-        border: "#2B2F33",
-        thread: "#C98A3E",
-        kit: "#3D5A80",
-        ink: "#F2F0EA",
-        muted: "#9BA0A5",
+        ground: "#F6F2EA",
+        surface: "#FFFFFF",
+        border: "#E1D9C8",
+        thread: "#B8752E",
+        kit: "#2F4C6B",
+        ink: "#1B1D1F",
+        muted: "#6B655A",
       },
       fontFamily: {
         display: ["var(--font-display)"],
