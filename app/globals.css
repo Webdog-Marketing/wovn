@@ -7,25 +7,25 @@ html {
 }
 
 body {
-  background-color: #14171a;
-  color: #f2f0ea;
+  background-color: #f6f2ea;
+  color: #1b1d1f;
 }
 
 ::selection {
-  background-color: #c98a3e;
-  color: #14171a;
+  background-color: #b8752e;
+  color: #f6f2ea;
 }
 
 *:focus-visible {
-  outline: 2px solid #c98a3e;
+  outline: 2px solid #b8752e;
   outline-offset: 2px;
 }
 
 .stitch-line {
   background-image: repeating-linear-gradient(
     to right,
-    #c98a3e 0px,
-    #c98a3e 10px,
+    #b8752e 0px,
+    #b8752e 10px,
     transparent 10px,
     transparent 20px
   );
@@ -43,7 +43,7 @@ body {
 }
 
 .thread-underline {
-  background-image: linear-gradient(#c98a3e, #c98a3e);
+  background-image: linear-gradient(#b8752e, #b8752e);
   background-repeat: no-repeat;
   background-position: 0 100%;
 }
