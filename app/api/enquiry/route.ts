@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createEnquiry, type EnquiryPayload } from "@/lib/airtable";
+import { sendEnquiryNotification } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   const body = (await req.json()) as EnquiryPayload;
@@ -13,7 +14,6 @@ export async function POST(req: NextRequest) {
 
   try {
     await createEnquiry(body);
-    return NextResponse.json({ ok: true });
   } catch (err) {
     console.error(err);
     return NextResponse.json(
@@ -21,4 +21,14 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
+
+  // The enquiry is safely saved at this point — a failed notification email
+  // shouldn't turn into an error the visitor sees.
+  try {
+    await sendEnquiryNotification(body);
+  } catch (err) {
+    console.error("Enquiry notification email failed:", err);
+  }
+
+  return NextResponse.json({ ok: true });
 }
