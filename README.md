@@ -62,6 +62,30 @@ in Resend's dashboard and update the `from` address in `lib/email.ts`.
 If these env vars aren't set, the form still works and still saves to
 Airtable — it just skips sending an email, rather than failing.
 
+## Cookies, analytics, and consent
+
+`components/CookieConsent.tsx` shows a banner on first visit and stores
+the choice in `localStorage`. Google Tag Manager (and everything
+inside it — GA4, Meta Pixel, Google Ads) only loads after someone
+clicks "Accept all." Nothing analytics/marketing-related loads before
+that, by design — this is a UK GDPR/PECR requirement, not just a nice-
+to-have.
+
+Set `NEXT_PUBLIC_GTM_ID` to your GTM container ID once you've set one
+up, and configure GA4, Meta Pixel, and Google Ads as tags *inside* GTM
+rather than adding them as separate scripts here.
+
+`NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` is only for Search Console
+ownership verification — it doesn't set any cookies, so it's outside
+the consent gate.
+
+**Before this goes live**: `app/privacy/page.tsx` and
+`app/cookies/page.tsx` have a few `[bracketed placeholders]` — legal
+entity name, contact email, and a data retention period — that need
+filling in with real values. Worth having both pages reviewed by
+whoever handles your legal/compliance matters before launch, since
+they're real legal documents, not just template copy.
+
 ## Shopify setup
 
 In Shopify admin: Settings → Apps and sales channels → Develop apps →
