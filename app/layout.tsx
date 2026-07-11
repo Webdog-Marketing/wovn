@@ -3,6 +3,7 @@ import { Oswald, Work_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 
 const display = Oswald({
   subsets: ["latin"],
@@ -26,6 +27,9 @@ export const metadata: Metadata = {
   title: "WOVN — Woven",
   description:
     "WOVN builds bespoke sportswear for organisations who refuse to be defined by their size.",
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 export default function RootLayout({
@@ -41,6 +45,7 @@ export default function RootLayout({
         <Nav />
         <main>{children}</main>
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   );

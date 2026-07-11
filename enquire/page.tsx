@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { COUNTRIES } from "@/lib/countries";
 
 const GARMENT_TYPES = [
   "Sports jersey",
@@ -27,12 +28,15 @@ export default function EnquirePage() {
     setStatus("submitting");
 
     const form = new FormData(e.currentTarget);
+    const phoneNumber = (form.get("phoneNumber") as string)?.trim();
+    const phonePrefix = form.get("phonePrefix") as string;
+
     const payload = {
       organisationName: form.get("organisationName"),
       organisationType: form.get("organisationType"),
       contactName: form.get("contactName"),
       email: form.get("email"),
-      phone: form.get("phone"),
+      phone: phoneNumber ? `${phonePrefix} ${phoneNumber}` : "",
       country: form.get("country"),
       garmentTypes: selectedGarments,
       hasLogo: form.get("hasLogo"),
@@ -92,8 +96,35 @@ export default function EnquirePage() {
           />
           <Field label="Contact name" name="contactName" required />
           <Field label="Email" name="email" type="email" required />
-          <Field label="Phone" name="phone" type="tel" />
-          <Field label="Country" name="country" />
+
+          <div>
+            <span className="mb-1 block text-sm text-muted">Phone</span>
+            <div className="flex gap-2">
+              <select
+                name="phonePrefix"
+                defaultValue="+44"
+                aria-label="Phone country code"
+                className="w-32 shrink-0 border border-border bg-surface px-2 py-2 text-ink outline-none focus:border-thread"
+              >
+                {COUNTRIES.map((c) => (
+                  <option key={c.name} value={c.dialCode}>
+                    {c.dialCode} {c.name}
+                  </option>
+                ))}
+              </select>
+              <input
+                name="phoneNumber"
+                type="tel"
+                className="flex-1 border border-border bg-surface px-3 py-2 text-ink outline-none focus:border-thread"
+              />
+            </div>
+          </div>
+
+          <SelectField
+            label="Country"
+            name="country"
+            options={COUNTRIES.map((c) => c.name)}
+          />
         </fieldset>
 
         <fieldset className="space-y-4">
