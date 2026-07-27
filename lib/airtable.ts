@@ -26,7 +26,11 @@ export async function getAllClients(): Promise<ClientRecord[]> {
     `${BASE_URL}/${baseId}/Clients?view=Grid%20view`,
     {
       headers: { Authorization: `Bearer ${apiKey}` },
-      next: { revalidate: 300 },
+      // Client data only changes when someone edits Airtable by hand, so
+      // there's no need to poll often — this cuts Airtable API usage
+      // drastically versus checking every few minutes. Tagged so it can be
+      // force-refreshed instantly via /api/revalidate right after an edit.
+      next: { revalidate: 21600, tags: ["clients"] },
     }
   );
 
