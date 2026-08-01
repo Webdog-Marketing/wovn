@@ -2,10 +2,14 @@ import Image from "next/image";
 import { getProductUrl, type ShopifyProduct } from "@/lib/shopify";
 
 export default function ProductCard({ product }: { product: ShopifyProduct }) {
+  const minAmount = Number(product.priceRange.minVariantPrice.amount);
+  const maxAmount = Number(product.priceRange.maxVariantPrice.amount);
+  const hasRange = maxAmount > minAmount;
+
   const price = new Intl.NumberFormat("en-GB", {
     style: "currency",
     currency: product.priceRange.minVariantPrice.currencyCode,
-  }).format(Number(product.priceRange.minVariantPrice.amount));
+  }).format(minAmount);
 
   const variant = product.variants.nodes[0];
   const inStock = variant?.availableForSale ?? false;
@@ -30,7 +34,7 @@ export default function ProductCard({ product }: { product: ShopifyProduct }) {
         </h3>
         <div className="mt-1 flex items-center gap-2">
           <p className="font-tag text-xs uppercase tracking-tag text-muted">
-            {price}
+            {hasRange ? `From ${price}` : price}
           </p>
           {!inStock && (
             <span className="font-tag text-xs uppercase tracking-tag text-muted">

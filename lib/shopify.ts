@@ -38,6 +38,7 @@ export type ShopifyProduct = {
   featuredImage: { url: string; altText: string | null } | null;
   priceRange: {
     minVariantPrice: { amount: string; currencyCode: string };
+    maxVariantPrice: { amount: string; currencyCode: string };
   };
   variants: {
     nodes: { id: string; availableForSale: boolean }[];
@@ -67,6 +68,10 @@ const COLLECTION_QUERY = `
           }
           priceRange {
             minVariantPrice {
+              amount
+              currencyCode
+            }
+            maxVariantPrice {
               amount
               currencyCode
             }
