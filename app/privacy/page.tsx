@@ -1,6 +1,7 @@
 import StitchDivider from "@/components/StitchDivider";
+import { COMPANY } from "@/content/company";
 
-export const metadata = { title: "Privacy Policy — WOVN" };
+export const metadata = { title: "Privacy Policy | WOVN" };
 
 export default function PrivacyPolicyPage() {
   return (
@@ -8,7 +9,7 @@ export default function PrivacyPolicyPage() {
       <h1 className="font-display text-4xl uppercase tracking-wide text-ink">
         Privacy Policy
       </h1>
-      <p className="mt-4 text-sm text-muted">Last updated: [add date]</p>
+      <p className="mt-4 text-sm text-muted">Last updated: 7 October 2026</p>
 
       <StitchDivider className="my-10" />
 
@@ -16,10 +17,14 @@ export default function PrivacyPolicyPage() {
         <div>
           <h2>Who we are</h2>
           <p>
-            WOVN is operated by [Webdog Sports Marketing / OneTerra
-            Consulting Limited — confirm legal entity name and company
-            number]. For any question about this policy or your data,
-            contact [insert contact email].
+            WOVN is operated by {COMPANY.legalName}, a company registered in{" "}
+            {COMPANY.jurisdiction} (company number {COMPANY.number}). Our registered
+            office is {COMPANY.registeredOffice}. For any question about this policy or
+            your data, email{" "}
+            <a href={`mailto:${COMPANY.email}`} className="text-thread thread-underline">
+              {COMPANY.email}
+            </a>
+            .
           </p>
         </div>
 
@@ -91,6 +96,17 @@ export default function PrivacyPolicyPage() {
         </div>
 
         <div>
+          <h2>International transfers</h2>
+          <p>
+            Some of the services above are based in the United States, or
+            process data there. Where your personal data is transferred outside the UK,
+            we rely on the safeguards recognised under UK GDPR, such as the UK Extension
+            to the EU-US Data Privacy Framework or the standard contract terms approved
+            by the Information Commissioner&apos;s Office.
+          </p>
+        </div>
+
+        <div>
           <h2>Legal basis</h2>
           <p>
             We process enquiry data on the basis of our legitimate interest
@@ -115,7 +131,7 @@ export default function PrivacyPolicyPage() {
           <p>
             Under UK GDPR, you can ask us to access, correct, or delete
             your personal data, or to restrict or object to how we use it.
-            To do so, contact [insert contact email]. You also have the
+            To do so, contact {COMPANY.email}. You also have the
             right to complain to the{" "}
             <a
               href="https://ico.org.uk"

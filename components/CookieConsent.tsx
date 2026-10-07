@@ -14,6 +14,24 @@ export function openCookiePreferences() {
   window.dispatchEvent(new Event(OPEN_PREFS_EVENT));
 }
 
+// Cookies set by Google Analytics, Google Ads and the Meta Pixel via Tag Manager.
+const TRACKING_COOKIE = /^(_ga|_gid|_gat|_gcl_|_gac_|_fbp|_fbc)/;
+
+function clearTrackingCookies() {
+  const host = window.location.hostname;
+  const parts = host.split(".");
+  const domains = [host, `.${host}`];
+  if (parts.length > 2) domains.push(`.${parts.slice(-2).join(".")}`);
+  for (const entry of document.cookie.split(";")) {
+    const name = entry.split("=")[0].trim();
+    if (!TRACKING_COOKIE.test(name)) continue;
+    for (const domain of domains) {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${domain}`;
+    }
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+  }
+}
+
 export default function CookieConsent() {
   const [consent, setConsent] = useState<Consent>("unset");
   const [mounted, setMounted] = useState(false);
@@ -31,8 +49,17 @@ export default function CookieConsent() {
   }, []);
 
   function choose(value: "accepted" | "rejected") {
+    const previous = window.localStorage.getItem(CONSENT_KEY);
     window.localStorage.setItem(CONSENT_KEY, value);
     setConsent(value);
+
+    // Withdrawing consent should actually stop the tracking: remove the
+    // analytics and advertising cookies already set, and reload so the
+    // Tag Manager script that was loaded earlier is gone.
+    if (value === "rejected" && previous === "accepted") {
+      clearTrackingCookies();
+      window.location.reload();
+    }
   }
 
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
@@ -76,13 +103,13 @@ export default function CookieConsent() {
             <div className="flex shrink-0 gap-3">
               <button
                 onClick={() => choose("rejected")}
-                className="border border-border px-4 py-2 font-tag text-xs uppercase tracking-tag text-muted hover:text-ink"
+                className="border border-ink px-5 py-2.5 font-tag text-xs uppercase tracking-tag text-ink hover:bg-ink hover:text-white"
               >
                 Necessary only
               </button>
               <button
                 onClick={() => choose("accepted")}
-                className="border border-thread bg-thread px-4 py-2 font-tag text-xs uppercase tracking-tag text-ink hover:opacity-90"
+                className="border border-ink px-5 py-2.5 font-tag text-xs uppercase tracking-tag text-ink hover:bg-ink hover:text-white"
               >
                 Accept all
               </button>

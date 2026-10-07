@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Oswald, Work_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Oswald, Work_Sans, IBM_Plex_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
@@ -17,6 +17,13 @@ const body = Work_Sans({
   variable: "--font-body",
 });
 
+const serif = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+});
+
 const tag = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -24,9 +31,9 @@ const tag = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "WOVN — Woven",
+  title: "WOVN | Stories worth telling",
   description:
-    "WOVN builds bespoke sportswear for organisations who refuse to be defined by their size.",
+    "WOVN exists to tell the stories of those who deserve their story told. Bespoke sportswear for federations, clubs, charities and teams.",
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
@@ -40,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${display.variable} ${body.variable} ${tag.variable} font-body`}
+        className={`${display.variable} ${body.variable} ${tag.variable} ${serif.variable} font-body`}
       >
         <Nav />
         <main>{children}</main>

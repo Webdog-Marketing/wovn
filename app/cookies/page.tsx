@@ -1,6 +1,6 @@
 import StitchDivider from "@/components/StitchDivider";
 
-export const metadata = { title: "Cookie Policy — WOVN" };
+export const metadata = { title: "Cookie Policy | WOVN" };
 
 export default function CookiePolicyPage() {
   return (
@@ -8,7 +8,7 @@ export default function CookiePolicyPage() {
       <h1 className="font-display text-4xl uppercase tracking-wide text-ink">
         Cookie Policy
       </h1>
-      <p className="mt-4 text-sm text-muted">Last updated: [add date]</p>
+      <p className="mt-4 text-sm text-muted">Last updated: 7 October 2026</p>
 
       <StitchDivider className="my-10" />
 

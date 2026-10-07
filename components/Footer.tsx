@@ -1,6 +1,7 @@
 "use client";
 
 import { openCookiePreferences } from "@/components/CookieConsent";
+import { COMPANY } from "@/content/company";
 
 export default function Footer() {
   return (
@@ -32,6 +33,12 @@ export default function Footer() {
         </div>
 
         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-border pt-6">
+          <a href="/stories" className="hover:text-ink">
+            Stories
+          </a>
+          <a href="/process" className="hover:text-ink">
+            Process and pricing
+          </a>
           <a href="/privacy" className="hover:text-ink">
             Privacy policy
           </a>
@@ -42,6 +49,15 @@ export default function Footer() {
             Cookie preferences
           </button>
         </div>
+
+        <p className="mt-6 max-w-3xl text-[11px] normal-case leading-relaxed tracking-normal">
+          WOVN is operated by {COMPANY.legalName}, registered in {COMPANY.jurisdiction}, company
+          number {COMPANY.number}. Registered office: {COMPANY.registeredOffice}. Email:{" "}
+          <a href={`mailto:${COMPANY.email}`} className="underline hover:text-ink">
+            {COMPANY.email}
+          </a>
+          .
+        </p>
       </div>
     </footer>
   );

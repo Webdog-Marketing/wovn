@@ -1,6 +1,6 @@
 import StitchDivider from "@/components/StitchDivider";
 
-export const metadata = { title: "About — WOVN" };
+export const metadata = { title: "About | WOVN" };
 
 export default function AboutPage() {
   return (

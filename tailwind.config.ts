@@ -12,11 +12,13 @@ const config: Config = {
         kit: "#2F4C6B",
         ink: "#1B1D1F",
         muted: "#6B655A",
+        night: "#15181B",
       },
       fontFamily: {
         display: ["var(--font-display)"],
         body: ["var(--font-body)"],
         tag: ["var(--font-tag)"],
+        serif: ["var(--font-serif)"],
       },
       letterSpacing: {
         tag: "0.14em",

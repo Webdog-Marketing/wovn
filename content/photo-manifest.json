@@ -1,0 +1,23 @@
+{
+  "david-follett": [
+    "/images/david-follett/01.jpg",
+    "/images/david-follett/02.jpg"
+  ],
+  "edukid": [
+    "/images/edukid/01.jpg",
+    "/images/edukid/02.jpg",
+    "/images/edukid/03.jpg"
+  ],
+  "home": [
+    "/images/home/01.jpg"
+  ],
+  "kiribati": [
+    "/images/kiribati/01.jpg"
+  ],
+  "marshall-islands": [
+    "/images/marshall-islands/01.jpg"
+  ],
+  "process": [
+    "/images/process/01.jpg"
+  ]
+}

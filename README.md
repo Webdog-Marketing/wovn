@@ -86,6 +86,25 @@ filling in with real values. Worth having both pages reviewed by
 whoever handles your legal/compliance matters before launch, since
 they're real legal documents, not just template copy.
 
+## Airtable caching and the free API quota
+
+Airtable's free plan caps out at 1,000 API calls a month. Client data
+is cached for 6 hours by default (`revalidate: 21600` in
+`lib/airtable.ts`) rather than checked constantly, since it only
+changes when someone edits Airtable by hand — this keeps well within
+the free quota even with regular site traffic.
+
+If you've just added or edited a client and don't want to wait up to 6
+hours to see it live, visit:
+
+```
+https://wovn.club/api/revalidate?secret=WwNp8-Ew99_sLm50ZRWKQ0-FNjiskxSH
+```
+
+to force an instant refresh, rather than lowering the cache time for
+everyone. (This only works once `REVALIDATE_SECRET` is set to this
+same value in Vercel's environment variables — see `.env.example`.)
+
 ## Shopify setup
 
 In Shopify admin: Settings → Apps and sales channels → Develop apps →
@@ -134,3 +153,26 @@ lib/
 components/
   Nav.tsx, Footer.tsx, ProductCard.tsx, StitchDivider.tsx
 ```
+
+
+## Photography and the redesign
+
+Photos live in `public/images/<folder>/` and are picked up automatically.
+The first image in each folder (`01.jpg`) is that page's hero.
+
+Folders: `home`, `marshall-islands`, `kiribati`, `david-follett`, `edukid`,
+and optionally `process`.
+
+To prepare a batch of originals (resizes to 2000px, compresses, renames):
+
+```
+npm install
+npm run images -- ~/Downloads/Edukid edukid
+```
+
+Then commit the new files in `public/images/`. `content/photo-manifest.json`
+is regenerated automatically on every build, so you never edit it by hand.
+Until photos are added, each slot shows a quiet placeholder.
+
+Copy for the case studies is in `content/stories.ts`. Guide prices and
+design fees are in `content/pricing.ts`.

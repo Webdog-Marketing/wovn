@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predev": "node scripts/build-photo-manifest.mjs",
+    "prebuild": "node scripts/build-photo-manifest.mjs",
+    "images": "node scripts/optimise-images.mjs"
   },
   "dependencies": {
     "next": "14.2.35",
@@ -20,6 +23,7 @@
     "autoprefixer": "10.4.19",
     "postcss": "8.4.39",
     "tailwindcss": "3.4.4",
-    "typescript": "5.5.3"
+    "typescript": "5.5.3",
+    "sharp": "0.33.5"
   }
 }
